@@ -127,7 +127,7 @@ create_link_win.bat
 
 For ubuntu platform:
 
-./create_link_win.sh
+./create_link_ubuntu.sh
 </font>
 #### Build
 Build only the web3.js package
