@@ -1,0 +1,11 @@
+{
+    "name": "web3-eth-personal",
+    "namespace": "vnscoin",
+    "version": "1.0.0-beta.36",
+    "description": "Web3 module to interact with the vnscoin blockchain accounts stored in the node.",
+    "repository": "https://github.com/AMTcommunity/vns-web3.js/packages/web3-eth-personal",
+    "license": "LGPL-3.0",
+    "main": "src/index.js",
+    "dependencies": {
+    }
+}

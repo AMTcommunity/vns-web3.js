@@ -1,0 +1,12 @@
+{
+    "name": "web3-vns-ens",
+    "version": "1.0.0-beta.36",
+    "description": "ENS support for web3.",
+    "repository": "https://github.com/AMTcommunity/vns-web3.js/packages/web3-eth-ens",
+    "license": "LGPL-3.0",
+    "main": "src/index.js",
+    "dependencies": {
+        "eth-ens-namehash": "2.0.8",
+        "underscore": "1.8.3"
+    }
+}

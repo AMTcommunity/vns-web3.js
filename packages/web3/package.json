@@ -1,0 +1,51 @@
+{
+  "name": "web3",
+  "namespace": "vnscoin",
+  "version": "1.0.0-beta.36",
+  "description": "Vnscoin JavaScript API",
+  "repository": "https://github.com/AMTcommunity/vns-web3.js/packages/web3",
+  "license": "LGPL-3.0",
+  "main": "src/index.js",
+  "bugs": {
+    "url": "https://github.com/AMTcommunity/vns-web3.js/issues"
+  },
+  "keywords": [
+    "Ethereum",
+    "JavaScript",
+    "API"
+  ],
+  "author": "ethereum.org",
+  "authors": [
+    {
+      "name": "Fabian Vogelsteller",
+      "email": "fabian@ethereum.org",
+      "homepage": "http://frozeman.de"
+    },
+    {
+      "name": "Marek Kotewicz",
+      "email": "marek@parity.io",
+      "url": "https://github.com/debris"
+    },
+    {
+      "name": "Marian Oancea",
+      "url": "https://github.com/cubedro"
+    },
+    {
+      "name": "Gav Wood",
+      "email": "g@parity.io",
+      "homepage": "http://gavwood.com"
+    },
+    {
+      "name": "Jeffery Wilcke",
+      "email": "jeffrey.wilcke@ethereum.org",
+      "url": "https://github.com/obscuren"
+    },
+    {
+      "name": "Kandy Ye",
+      "email": "yelongbao@126.com",
+      "url": "https://github.com/yelongbao"
+    }
+  ],
+  "dependencies": {
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "name": "web3-vns-abi",
+  "namespace": "vnscoin",
+  "version": "1.0.0-beta.36",
+  "description": "Web3 module encode and decode EVM in/output.",
+  "repository": "https://github.com/AMTcommunity/vns-web3.js/packages/web3-vns-abi",
+  "license": "LGPL-3.0",
+  "main": "src/index.js",
+  "dependencies": {
+    "ethers": "4.0.0-beta.1",
+    "underscore": "1.8.3"
+  }
+}

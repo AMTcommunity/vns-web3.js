@@ -1,0 +1,12 @@
+{
+    "name": "web3-vns-contract",
+    "namespace": "vnscoin",
+    "version": "1.0.0-beta.36",
+    "description": "Web3 module to interact with vnscoin smart contracts.",
+    "repository": "https://github.com/AMTcommunity/vns-web3.js/packages/web3-eth-contract",
+    "license": "LGPL-3.0",
+    "main": "src/index.js",
+    "dependencies": {
+        "underscore": "1.8.3"
+    }
+}
