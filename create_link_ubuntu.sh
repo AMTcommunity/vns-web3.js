@@ -1,3 +1,9 @@
+mkdir $(pwd)/packages/web3-core/node_modules
+mkdir $(pwd)/packages/web3-core/node_modules
+mkdir $(pwd)/packages/web3-net/node_modules
+mkdir $(pwd)/packages/web3-shh/node_modules
+mkdir $(pwd)/packages/web3-vns-personal/node_modules
+mkdir $(pwd)/packages/web3/node_modules
 ln -s $(pwd)/packages/web3-utils $(pwd)/packages/web3-vns-abi/node_modules/web3-utils
 ln -s $(pwd)/packages/web3-utils $(pwd)/packages/web3-vns-iban/node_modules/web3-utils
 ln -s $(pwd)/packages/web3-vns-iban $(pwd)/packages/web3-core-helpers/node_modules/web3-vns-iban
