@@ -23,19 +23,19 @@
 "use strict";
 
 var _ = require('underscore');
-var core = require('web3-core');
-var helpers = require('web3-core-helpers');
-var Subscriptions = require('web3-core-subscriptions').subscriptions;
-var Method = require('web3-core-method');
-var utils = require('web3-utils');
-var Net = require('web3-net');
+var core = require('../../web3-core');
+var helpers = require('../../web3-core-helpers');
+var Subscriptions = require('../../web3-core-subscriptions').subscriptions;
+var Method = require('../../web3-core-method');
+var utils = require('../../web3-utils');
+var Net = require('../../web3-net');
 
-var ENS = require('web3-vns-ens');
-var Personal = require('web3-vns-personal');
-var BaseContract = require('web3-vns-contract');
-var Iban = require('web3-vns-iban');
-var Accounts = require('web3-vns-accounts');
-var abi = require('web3-vns-abi');
+var ENS = require('../../web3-vns-ens');
+var Personal = require('../../web3-vns-personal');
+var BaseContract = require('../../web3-vns-contract');
+var Iban = require('../../web3-vns-iban');
+var Accounts = require('../../web3-vns-accounts');
+var abi = require('../../web3-vns-abi');
 
 var getNetworkType = require('./getNetworkType.js');
 var formatter = helpers.formatters;
@@ -81,7 +81,113 @@ var Vns = function Vns() {
 
     var defaultAccount = null;
     var defaultBlock = 'latest';
+    var transactionBlockTimeout = 50;
+    var transactionConfirmationBlocks = 24;
+    var transactionPollingTimeout = 750;
+    var defaultChain, defaultHardfork, defaultCommon;
 
+    Object.defineProperty(this, 'defaultCommon', {
+        get: function () {
+            return defaultCommon;
+        },
+        set: function (val) {
+            defaultCommon = val;
+
+            // also set on the Contract object
+            _this.Contract.defaultCommon = defaultCommon;
+
+            // update defaultBlock
+            methods.forEach(function(method) {
+                method.defaultCommon = defaultCommon;
+            });
+        },
+        enumerable: true
+    });
+    Object.defineProperty(this, 'defaultHardfork', {
+        get: function () {
+            return defaultHardfork;
+        },
+        set: function (val) {
+            defaultHardfork = val;
+
+            // also set on the Contract object
+            _this.Contract.defaultHardfork = defaultHardfork;
+
+            // update defaultBlock
+            methods.forEach(function(method) {
+                method.defaultHardfork = defaultHardfork;
+            });
+        },
+        enumerable: true
+    });
+    Object.defineProperty(this, 'defaultChain', {
+        get: function () {
+            return defaultChain;
+        },
+        set: function (val) {
+            defaultChain = val;
+
+            // also set on the Contract object
+            _this.Contract.defaultChain = defaultChain;
+
+            // update defaultBlock
+            methods.forEach(function(method) {
+                method.defaultChain = defaultChain;
+            });
+        },
+        enumerable: true
+    });
+    Object.defineProperty(this, 'transactionPollingTimeout', {
+        get: function () {
+            return transactionPollingTimeout;
+        },
+        set: function (val) {
+            transactionPollingTimeout = val;
+
+            // also set on the Contract object
+            _this.Contract.transactionPollingTimeout = transactionPollingTimeout;
+
+            // update defaultBlock
+            methods.forEach(function(method) {
+                method.transactionPollingTimeout = transactionPollingTimeout;
+            });
+        },
+        enumerable: true
+    });
+    Object.defineProperty(this, 'transactionConfirmationBlocks', {
+        get: function () {
+            return transactionConfirmationBlocks;
+        },
+        set: function (val) {
+            transactionConfirmationBlocks = val;
+
+            // also set on the Contract object
+            _this.Contract.transactionConfirmationBlocks = transactionConfirmationBlocks;
+
+            // update defaultBlock
+            methods.forEach(function(method) {
+                method.transactionConfirmationBlocks = transactionConfirmationBlocks;
+            });
+        },
+        enumerable: true
+    });
+    Object.defineProperty(this, 'transactionBlockTimeout', {
+        get: function () {
+            return transactionBlockTimeout;
+        },
+        set: function (val) {
+            transactionBlockTimeout = val;
+
+            // also set on the Contract object
+            _this.Contract.transactionBlockTimeout = transactionBlockTimeout;
+
+            // update defaultBlock
+            methods.forEach(function(method) {
+                method.transactionBlockTimeout = transactionBlockTimeout;
+            });
+        },
+        enumerable: true
+    });
     Object.defineProperty(this, 'defaultAccount', {
         get: function () {
             return defaultAccount;
@@ -142,14 +248,14 @@ var Vns = function Vns() {
     // create a proxy Contract type for this instance, as a Contract's provider
     // is stored as a class member rather than an instance variable. If we do
     // not create this proxy type, changing the provider in one instance of
-    // web3-eth would subsequently change the provider for _all_ contract
+    // web3-vns would subsequently change the provider for _all_ contract
     // instances!
     var self = this;
     var Contract = function Contract() {
         BaseContract.apply(this, arguments);
 
-        // when Eth.setProvider is called, call packageInit
-        // on all contract instances instantiated via this Eth
+        // when Vns.setProvider is called, call packageInit
+        // on all contract instances instantiated via this Vns
         // instances. This will update the currentProvider for
         // the contract instances
         var _this = this;
@@ -164,7 +270,7 @@ var Vns = function Vns() {
         BaseContract.setProvider.apply(this, arguments);
     };
 
-    // make our proxy Contract inherit from web3-eth-contract so that it has all
+    // make our proxy Contract inherit from web3-vns-contract so that it has all
     // the right functionality and so that instanceof and friends work properly
     Contract.prototype = Object.create(BaseContract.prototype);
     Contract.prototype.constructor = Contract;
@@ -173,6 +279,9 @@ var Vns = function Vns() {
     this.Contract = Contract;
     this.Contract.defaultAccount = this.defaultAccount;
     this.Contract.defaultBlock = this.defaultBlock;
+    this.Contract.transactionBlockTimeout = this.transactionBlockTimeout;
+    this.Contract.transactionConfirmationBlocks = this.transactionConfirmationBlocks;
+    this.Contract.transactionPollingTimeout = this.transactionPollingTimeout;
     this.Contract.setProvider(this.currentProvider, this.accounts);
 
     // add IBAN
@@ -368,6 +477,12 @@ var Vns = function Vns() {
             inputFormatter: [formatter.inputLogFormatter],
             outputFormatter: formatter.outputLogFormatter
         }),
+        new Method({
+            name: 'getChainId',
+            call: 'vns_chainId',
+            params: 0,
+            outputFormatter: utils.hexToNumber
+        }),
 
         // subscriptions
         new Subscriptions({
@@ -455,6 +570,9 @@ var Vns = function Vns() {
         method.setRequestManager(_this._requestManager, _this.accounts); // second param means is eth.accounts (necessary for wallet signing)
         method.defaultBlock = _this.defaultBlock;
         method.defaultAccount = _this.defaultAccount;
+        method.transactionBlockTimeout = _this.transactionBlockTimeout;
+        method.transactionConfirmationBlocks = _this.transactionConfirmationBlocks;
+        method.transactionPollingTimeout = _this.transactionPollingTimeout;
     });
 
 };

@@ -1,26 +1,26 @@
 var chai = require('chai');
 var assert = chai.assert;
-var Eth = require('../packages/web3-vns');
+var Vns = require('../packages/web3-vns');
 
-var eth = new Eth();
+var vns = new Vns();
 
 var setValue = 123;
 
 describe('web3.vns', function () {
     describe('defaultBlock', function () {
         it('should check if defaultBlock is set to proper value', function () {
-            assert.equal(eth.defaultBlock, 'latest');
-            assert.equal(eth.personal.defaultBlock, 'latest');
-            assert.equal(eth.Contract.defaultBlock, 'latest');
-            assert.equal(eth.getCode.method.defaultBlock, 'latest');
+            assert.equal(vns.defaultBlock, 'latest');
+            assert.equal(vns.personal.defaultBlock, 'latest');
+            assert.equal(vns.Contract.defaultBlock, 'latest');
+            assert.equal(vns.getCode.method.defaultBlock, 'latest');
         });
-        it('should set defaultBlock for all sub packages is set to proper value, if Eth package is changed', function () {
-            eth.defaultBlock = setValue;
+        it('should set defaultBlock for all sub packages is set to proper value, if Vns package is changed', function () {
+            vns.defaultBlock = setValue;
 
-            assert.equal(eth.defaultBlock, setValue);
-            assert.equal(eth.personal.defaultBlock, setValue);
-            assert.equal(eth.Contract.defaultBlock, setValue);
-            assert.equal(eth.getCode.method.defaultBlock, setValue);
+            assert.equal(vns.defaultBlock, setValue);
+            assert.equal(vns.personal.defaultBlock, setValue);
+            assert.equal(vns.Contract.defaultBlock, setValue);
+            assert.equal(vns.getCode.method.defaultBlock, setValue);
         });
     });
 });

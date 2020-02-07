@@ -1,7 +1,5 @@
 .. _shh:
 
-.. include:: include_announcement.rst
-
 ========
 web3.shh
 ========
@@ -587,7 +585,7 @@ Returns
 -------
 
 
-``String`` - Key ID on success and an error on failure.
+``Promise<string>|undefined`` - Returns the Key ID as Promise or undefined if a callback is defined.
 
 
 -------

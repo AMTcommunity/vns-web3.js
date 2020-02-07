@@ -15,11 +15,11 @@ describe('Web3.providers.givenProvider', function () {
 
         });
 
-        it('when instantiating Eth', function () {
+        it('when instantiating Vns', function () {
 
-            var Eth = require('../packages/web3-vns');
+            var Vns = require('../packages/web3-vns');
 
-            assert.deepEqual(Eth.givenProvider, global.ethereumProvider);
+            assert.deepEqual(Vns.givenProvider, global.ethereumProvider);
 
         });
 

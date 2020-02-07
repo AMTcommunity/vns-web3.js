@@ -22,7 +22,7 @@
  */
 
 var _ = require('underscore');
-var utils = require('web3-utils');
+var utils = require('../../web3-utils');
 
 var EthersAbi = require('ethers/utils/abi-coder').AbiCoder;
 var ethersAbiCoder = new EthersAbi(function (type, value) {
@@ -222,8 +222,14 @@ ABICoder.prototype.decodeParameter = function (type, bytes) {
  * @return {Array} array of plain params
  */
 ABICoder.prototype.decodeParameters = function (outputs, bytes) {
-    if (!bytes || bytes === '0x' || bytes === '0X') {
-        throw new Error('Returned values aren\'t valid, did it run Out of Gas?');
+    if (outputs.length > 0 && (!bytes || bytes === '0x' || bytes === '0X')) {
+        throw new Error(
+            'Returned values aren\'t valid, did it run Out of Gas? ' +
+            'You might also see this error if you are not using the ' +
+            'correct ABI for the contract you are retrieving data from, ' +
+            'requesting data from a block number that does not exist, ' +
+            'or querying a node which is not fully synced.'
+        );
     }
 
     var res = ethersAbiCoder.decode(this.mapTypes(outputs), '0x' + bytes.replace(/0x/i, ''));

@@ -2,7 +2,7 @@ var chai = require('chai');
 var assert = chai.assert;
 var net = require('net');
 
-var Eth = require('../packages/web3-vns');
+var Vns = require('../packages/web3-vns');
 var Shh = require('../packages/web3-shh');
 var Net = require('../packages/web3-net');
 var Web3 = require('../packages/web3');
@@ -29,11 +29,11 @@ var tests = [{
     providerType: 'WebsocketProvider',
     package: Web3
 },{
-    providerParams: ['/.ethereum/my/path/geth.ipc', net],
+    providerParams: ['/.ethereum/my/path/gvns.ipc', net],
     providerType: 'IpcProvider',
     package: Web3
 },{
-    providerParams: ['\\\\.\\pipe\\geth.ipc', net],
+    providerParams: ['\\\\.\\pipe\\gvns.ipc', net],
     providerType: 'IpcProvider',
     package: Web3
 },{
@@ -59,11 +59,11 @@ var tests = [{
         providerType: 'WebsocketProvider',
         package: Net
     },{
-        providerParams: ['/.ethereum/my/path/geth.ipc', net],
+        providerParams: ['/.ethereum/my/path/gvns.ipc', net],
         providerType: 'IpcProvider',
         package: Net
     },{
-        providerParams: ['\\\\.\\pipe\\geth.ipc', net],
+        providerParams: ['\\\\.\\pipe\\gvns.ipc', net],
         providerType: 'IpcProvider',
         package: Net
     },{
@@ -89,11 +89,11 @@ var tests = [{
         providerType: 'WebsocketProvider',
         package: Shh
     },{
-        providerParams: ['/.ethereum/my/path/geth.ipc', net],
+        providerParams: ['/.ethereum/my/path/gvns.ipc', net],
         providerType: 'IpcProvider',
         package: Shh
     },{
-        providerParams: ['\\\\.\\pipe\\geth.ipc', net],
+        providerParams: ['\\\\.\\pipe\\gvns.ipc', net],
         providerType: 'IpcProvider',
         package: Shh
     },{
@@ -105,30 +105,30 @@ var tests = [{
     {
         providerParams: ['http://localhost:8545'],
         providerType: 'HttpProvider',
-        package: Eth
+        package: Vns
     },{
         providerParams: ['HTTP://localhost:8545'],
         providerType: 'HttpProvider',
-        package: Eth
+        package: Vns
     },{
         providerParams: ['ws://localhost:8546'],
         providerType: 'WebsocketProvider',
-        package: Eth
+        package: Vns
     },{
         providerParams: ['WS://localhost:8546'],
         providerType: 'WebsocketProvider',
-        package: Eth
+        package: Vns
     },{
-        providerParams: ['/.ethereum/my/path/geth.ipc', net],
+        providerParams: ['/.ethereum/my/path/gvns.ipc', net],
         providerType: 'IpcProvider',
-        package: Eth
+        package: Vns
     },{
-        providerParams: ['\\\\.\\pipe\\geth.ipc', net],
+        providerParams: ['\\\\.\\pipe\\gvns.ipc', net],
         providerType: 'IpcProvider',
-        package: Eth
+        package: Vns
     },{
         providerParams: ['://hello.com:1234'],
-        package: Eth,
+        package: Vns,
         error: true
     }];
 

@@ -1,7 +1,7 @@
 var testMethod = require('./helpers/test.method.js');
-var Eth = require('../packages/web3-vns');
+var Vns = require('../packages/web3-vns');
 
-var eth = new Eth();
+var vns = new Vns();
 
 var method = 'sign';
 

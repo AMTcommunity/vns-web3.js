@@ -23,7 +23,7 @@
 "use strict";
 
 var _ = require('underscore');
-var errors = require('web3-core-helpers').errors;
+var errors = require('../../web3-core-helpers').errors;
 var oboe = require('oboe');
 
 
@@ -309,6 +309,16 @@ IpcProvider.prototype.reset = function () {
     this.connection.removeAllListeners('timeout');
 
     this.addDefaultEvents();
+};
+
+/**
+ * Returns the desired boolean.
+ *
+ * @method supportsSubscriptions
+ * @returns {boolean}
+ */
+IpcProvider.prototype.supportsSubscriptions = function () {
+    return true;
 };
 
 module.exports = IpcProvider;

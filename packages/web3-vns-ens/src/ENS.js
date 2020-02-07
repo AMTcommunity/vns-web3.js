@@ -28,7 +28,7 @@ var ResolverMethodHandler = require('./lib/ResolverMethodHandler');
  * Constructs a new instance of ENS
  *
  * @method ENS
- * @param {Object} eth
+ * @param {Object} vns
  * @constructor
  */
 function ENS(vns) {

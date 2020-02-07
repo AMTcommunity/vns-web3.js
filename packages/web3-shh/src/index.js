@@ -22,11 +22,11 @@
 
 "use strict";
 
-var core = require('web3-core');
-var Subscriptions = require('web3-core-subscriptions').subscriptions;
-var Method = require('web3-core-method');
+var core = require('../../web3-core');
+var Subscriptions = require('../../web3-core-subscriptions').subscriptions;
+var Method = require('../../web3-core-method');
 // var formatters = require('web3-core-helpers').formatters;
-var Net = require('web3-net');
+var Net = require('../../web3-net');
 
 
 var Shh = function Shh() {
@@ -42,10 +42,7 @@ var Shh = function Shh() {
         _this.net.setProvider.apply(_this, arguments);
     };
 
-    this.clearSubscriptions = _this._requestManager.clearSubscriptions;
-
     this.net = new Net(this.currentProvider);
-
 
     [
         new Subscriptions({
@@ -178,6 +175,10 @@ var Shh = function Shh() {
         method.attachToObject(_this);
         method.setRequestManager(_this._requestManager);
     });
+};
+
+Shh.prototype.clearSubscriptions = function () {
+     this._requestManager.clearSubscriptions();
 };
 
 core.addProviders(Shh);

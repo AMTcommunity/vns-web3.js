@@ -1,4 +1,4 @@
-var Accounts = require("./../packages/web3-vns-accounts");
+var Accounts = require("../packages/web3-vns-accounts");
 var chai = require('chai');
 var assert = chai.assert;
 var Web3 = require('../packages/web3');
@@ -21,7 +21,7 @@ var tests = [
 ];
 
 
-describe("eth", function () {
+describe("vns", function () {
     describe("accounts.wallet", function () {
 
         tests.forEach(function (test, i) {
@@ -291,7 +291,6 @@ describe("eth", function () {
 
                 var addressFromKeystore = ethAccounts.wallet[0].address;
                 assert.equal(addressFromKeystore, addressFromWallet);
-
             });
         });
     });

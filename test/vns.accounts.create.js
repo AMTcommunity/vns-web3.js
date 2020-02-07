@@ -1,5 +1,5 @@
-var Accounts = require("./../packages/web3-vns-accounts");
-var ethereumWallet = require('ethereumjs-wallet');
+var Accounts = require("../packages/web3-vns-accounts");
+var ethers = require('ethers');
 var chai = require('chai');
 var assert = chai.assert;
 var Web3 = require('../packages/web3');
@@ -11,21 +11,22 @@ for (var i = 0; i < 1000; i++) {
 }
 
 
-describe("eth", function () {
+describe("vns", function () {
     describe("accounts", function () {
 
         tests.forEach(function (test, i) {
-            it("create eth.account, and compare to ethereumjs-wallet", function() {
+            it("create vns.account, and compare to ethers wallet", function() {
                 var ethAccounts = new Accounts();
 
                 // create account
                 var acc = ethAccounts.create();
 
-                // create ethereumjs-wallet account
-                var ethWall = ethereumWallet.fromPrivateKey(new Buffer(acc.privateKey.replace('0x',''),'hex'));
+                // create ethers wallet
+                var ethWall = new ethers.Wallet(acc.privateKey);
 
-                // compare addresses
-                assert.equal(acc.address, ethWall.getChecksumAddressString());
+                // compare addresses and private keys
+                assert.equal(acc.address, ethWall.address);
+                assert.equal(acc.privateKey, ethWall.privateKey);
             });
 
         });

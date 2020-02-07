@@ -1,12 +1,28 @@
 {
-  "name": "web3-vns",
-  "namespace": "vnscoin",
-  "version": "1.0.0-beta.36",
-  "description": "Web3 module to interact with the vnscoin blockchain and smart contracts.",
-  "repository": "https://github.com/AMTcommunity/vns-web3.js/packages/web3-vns",
-  "license": "LGPL-3.0",
-  "main": "src/index.js",
-  "dependencies": {
-    "underscore": "1.8.3"
-  }
+    "name": "web3-vns",
+    "version": "1.2.4",
+    "description": "Web3 module to interact with the Vnscoin blockchain and smart contracts.",
+    "repository": "https://github.com/AMTcommunity/vns-web3.js/packages/web3-vns",
+    "license": "LGPL-3.0",
+    "engines": {
+        "node": ">=8.0.0"
+    },
+    "types": "types/index.d.ts",
+    "scripts": {
+        "dtslint": "dtslint types --onlyTestTsNext"
+    },
+    "main": "src/index.js",
+    "dependencies": {
+        "underscore": "1.9.1"
+
+
+
+
+
+
+    },
+    "devDependencies": {
+        "definitelytyped-header-parser": "^1.0.1",
+        "dtslint": "0.4.2"
+    }
 }

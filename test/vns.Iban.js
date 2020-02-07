@@ -1,7 +1,7 @@
 var chai = require('chai');
 var assert = chai.assert;
-var Eth = require('../packages/web3-vns');
-var eth = new Eth();
+var Vns = require('../packages/web3-vns');
+var vns = new Vns();
 
 var tests = [
     {
@@ -23,21 +23,21 @@ var tests = [
     }
 ];
 
-describe('eth', function () {
+describe('vns', function () {
     describe('Iban', function () {
         tests.forEach(function (test) {
             it('toAddress() should transform iban to address: ' +  test.address, function () {
                 if(test.error) {
-                    assert.throws(eth.Iban.toAddress.bind(eth.Iban, test.direct));
+                    assert.throws(vns.Iban.toAddress.bind(vns.Iban, test.direct));
                 } else {
-                    assert.deepEqual(eth.Iban.toAddress(test.direct), test.address);
+                    assert.deepEqual(vns.Iban.toAddress(test.direct), test.address);
                 }
             });
             it('toIban() should transform address to iban: ' +  test.address, function () {
                 if(test.error) {
-                    assert.throws(eth.Iban.toIban.bind(eth, test.address));
+                    assert.throws(vns.Iban.toIban.bind(vns, test.address));
                 } else {
-                    assert.deepEqual(eth.Iban.toIban(test.address), test.direct);
+                    assert.deepEqual(vns.Iban.toIban(test.address), test.direct);
                 }
             });
         });

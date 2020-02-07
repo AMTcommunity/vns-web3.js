@@ -23,7 +23,7 @@
 "use strict";
 
 var _ = require('underscore');
-var errors = require('web3-core-helpers').errors;
+var errors = require('../../web3-core-helpers').errors;
 var EventEmitter = require('eventemitter3');
 
 function Subscription(options) {
@@ -31,7 +31,7 @@ function Subscription(options) {
 
     this.id = null;
     this.callback = _.identity;
-    this.arguments = null;
+    //this.arguments = null;
     this._reconnectIntervalId = null;
 
     this.options = {
@@ -112,7 +112,7 @@ Subscription.prototype._formatInput = function (args) {
  * Should be called to format output(result) of method
  *
  * @method formatOutput
- * @param {Object}
+ * @param result {Object}
  * @return {Object}
  */
 
@@ -249,6 +249,7 @@ Subscription.prototype.subscribe = function() {
     this.options.requestManager.send(payload, function (err, result) {
         if(!err && result) {
             _this.id = result;
+            _this.emit('connected', result);
 
             // call callback on notifications
             _this.options.requestManager.addSubscription(_this.id, payload.params[0] , _this.options.type, function(err, result) {

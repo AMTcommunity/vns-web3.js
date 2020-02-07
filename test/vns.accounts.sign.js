@@ -1,4 +1,4 @@
-var Accounts = require("./../packages/web3-vns-accounts");
+var Accounts = require("../packages/web3-vns-accounts");
 var chai = require('chai');
 var assert = chai.assert;
 var Web3 = require('../packages/web3');
@@ -27,7 +27,7 @@ var tests = [
 ];
 
 
-describe("eth", function () {
+describe("vns", function () {
     describe("accounts", function () {
 
         tests.forEach(function (test, i) {

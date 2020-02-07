@@ -1,11 +1,24 @@
 {
     "name": "web3-net",
-    "namespace": "vnscoin",
-    "version": "1.0.0-beta.36",
-    "description": "Web3 module to interact with the vnscoin nodes networking properties.",
+    "version": "1.2.4",
+    "description": "Web3 module to interact with the Vnscoin nodes networking properties.",
     "repository": "https://github.com/AMTcommunity/vns-web3.js/packages/web3-net",
     "license": "LGPL-3.0",
+    "engines": {
+        "node": ">=8.0.0"
+    },
+    "types": "types/index.d.ts",
+    "scripts": {
+        "dtslint": "dtslint types --onlyTestTsNext"
+    },
     "main": "src/index.js",
     "dependencies": {
+
+
+
+    },
+    "devDependencies": {
+        "definitelytyped-header-parser": "^1.0.1",
+        "dtslint": "0.4.2"
     }
 }

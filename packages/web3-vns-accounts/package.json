@@ -1,17 +1,32 @@
 {
-  "name": "web3-vns-accounts",
-  "namespace": "vnscoin",
-  "version": "1.0.0-beta.36",
-  "description": "Web3 module to generate vnscoin accounts and sign data and transactions.",
-  "repository": "https://github.com/AMTcommunity/vns-web3.js/packages/web3-eth-accounts",
-  "license": "LGPL-3.0",
-  "main": "src/index.js",
-  "dependencies": {
-    "any-promise": "1.3.0",
-    "crypto-browserify": "3.12.0",
-    "eth-lib": "0.2.7",
-    "scrypt.js": "0.2.0",
-    "underscore": "1.8.3",
-    "uuid": "2.0.1"
-  }
+    "name": "web3-vns-accounts",
+    "version": "1.2.4",
+    "description": "Web3 module to generate Ethereum accounts and sign data and transactions.",
+    "repository": "https://github.com/AMTcommunity/vns-web3.js/packages/web3-vns-accounts",
+    "license": "LGPL-3.0",
+    "engines": {
+        "node": ">=8.0.0"
+    },
+    "types": "types/index.d.ts",
+    "scripts": {
+        "dtslint": "dtslint types --onlyTestTsNext"
+    },
+    "main": "src/index.js",
+    "dependencies": {
+        "@web3-js/scrypt-shim": "^0.1.0",
+        "any-promise": "1.3.0",
+        "crypto-browserify": "3.12.0",
+        "eth-lib": "0.2.7",
+        "ethereumjs-common": "^1.3.2",
+        "ethereumjs-tx": "^2.1.1",
+        "underscore": "1.9.1",
+        "uuid": "3.3.2"
+
+
+
+    },
+    "devDependencies": {
+        "definitelytyped-header-parser": "^1.0.1",
+        "dtslint": "0.4.2"
+    }
 }

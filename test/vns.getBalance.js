@@ -1,7 +1,7 @@
 var testMethod = require('./helpers/test.method.js');
-var Eth = require('../packages/web3-vns');
+var Vns = require('../packages/web3-vns');
 
-var eth = new Eth();
+var vns = new Vns();
 
 var method = 'getBalance';
 
@@ -25,7 +25,7 @@ var tests = [{
     call: 'vns_'+ method
 }, {
     args: ['0x000000000000000000000000000000000000012d'],
-    formattedArgs: ['0x000000000000000000000000000000000000012d', eth.defaultBlock],
+    formattedArgs: ['0x000000000000000000000000000000000000012d', vns.defaultBlock],
     result: '0x31981',
     formattedResult: '203137',
     call: 'vns_'+ method

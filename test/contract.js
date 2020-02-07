@@ -1,6 +1,6 @@
 var chai = require('chai');
 var assert = chai.assert;
-var Eth = require('../packages/web3-vns');
+var Vns = require('../packages/web3-vns');
 var sha3 = require('../packages/web3-utils').sha3;
 var FakeIpcProvider = require('./helpers/FakeIpcProvider');
 var FakeHttpProvider = require('./helpers/FakeHttpProvider');
@@ -217,10 +217,10 @@ var getStandAloneContractInstance = function(abi, address, options, provider) {
     return new StandAloneContract(abi, address, options);
 }
 
-var getEthContractInstance = function(abi, address, options, provider) {
+var getVnsContractInstance = function(abi, address, options, provider) {
 
     // if no address supplied
-    if (address && typeof address != 'string') {
+    if (address && typeof address !== 'string') {
 
         // no options provided, either
         if (!options && !provider) {
@@ -239,9 +239,9 @@ var getEthContractInstance = function(abi, address, options, provider) {
         options = undefined;
     }
 
-    var eth = new Eth(provider);//var Eth = require('../packages/web3-vns');
-    eth.setProvider(provider);
-    return new eth.Contract(abi, address, options);
+    var vns = new Vns(provider);//var Vns = require('../packages/web3-vns');
+    vns.setProvider(provider);
+    return new vns.Contract(abi, address, options);
 }
 
 var account = {
@@ -2219,39 +2219,40 @@ var runTests = function(contractFactory) {
             var contract = contractFactory(abi, address, provider);
 
             var count = 0;
-            contract.methods.mySend(address, 10).send({from: address2, gasPrice: '21345678654321'})
-            .on('confirmation', function (confirmationNumber, receipt) {
-                count++;
-                if(count === 1) {
-                    assert.deepEqual(receipt, {
-                        contractAddress: null,
-                        cumulativeGasUsed: 10,
-                        transactionIndex: 3,
-                        transactionHash: '0x1234',
-                        blockNumber: 10,
-                        blockHash: '0x1234',
-                        gasUsed: 0,
-                        events: {}
-                    });
+            contract.methods.mySend(address, 10)
+                .send({from: address2, gasPrice: '21345678654321'})
+                .on('confirmation', function (confirmationNumber, receipt) {
+                    count++;
+                    if(count === 1) {
+                        assert.deepEqual(receipt, {
+                            contractAddress: null,
+                            cumulativeGasUsed: 10,
+                            transactionIndex: 3,
+                            transactionHash: '0x1234',
+                            blockNumber: 10,
+                            blockHash: '0x1234',
+                            gasUsed: 0,
+                            events: {}
+                        });
 
-                    assert.equal(confirmationNumber, 0)
-                }
-                if(count === 2) {
-                    assert.deepEqual(receipt, {
-                        contractAddress: null,
-                        cumulativeGasUsed: 10,
-                        transactionIndex: 3,
-                        transactionHash: '0x1234',
-                        blockNumber: 10,
-                        blockHash: '0x1234',
-                        gasUsed: 0,
-                        events: {}
-                    });
+                        assert.equal(confirmationNumber, 0);
+                    }
+                    if(count === 2) {
+                        assert.deepEqual(receipt, {
+                            contractAddress: null,
+                            cumulativeGasUsed: 10,
+                            transactionIndex: 3,
+                            transactionHash: '0x1234',
+                            blockNumber: 10,
+                            blockHash: '0x1234',
+                            gasUsed: 0,
+                            events: {}
+                        });
 
-                    assert.equal(confirmationNumber, 1)
-                    done();
-                };
-            });
+                        assert.equal(confirmationNumber, 1);
+                        done();
+                    }
+                });
 
             // fake newBlocks
             provider.injectNotification({
@@ -3001,35 +3002,37 @@ var runTests = function(contractFactory) {
 }
 
 describe('typical usage', function() {
-    runTests(getEthContractInstance);
+    runTests(getVnsContractInstance);
 
-    it('should update contract instance provider when assigned a provider to eth instance that contract instance came from', function () {
+    it('should update contract instance provider when assigned a provider to vns instance that contract instance came from', function () {
         var provider1 = new FakeIpcProvider();
         var provider2 = new FakeHttpProvider();
 
-        var eth = new Eth(provider1);
-        var contract = new eth.Contract(abi, address);
+        var vns = new Vns(provider1);
+        var contract = new vns.Contract(abi, address);
         assert.deepEqual(contract.currentProvider, provider1);
-        assert.deepEqual(eth.currentProvider, provider1);
+        assert.deepEqual(vns.currentProvider, provider1);
 
-        eth.setProvider(provider2);
+        vns.setProvider(provider2);
         assert.deepEqual(contract.currentProvider, provider2);
-        assert.deepEqual(eth.currentProvider, provider2);
+        assert.deepEqual(vns.currentProvider, provider2);
     });
 
     it('should deploy a contract, sign transaction, and return contract instance', function (done) {
         var provider = new FakeIpcProvider();
-        var eth = new Eth(provider);
-        eth.accounts.wallet.add(account.privateKey);
+        var vns = new Vns(provider);
+        vns.accounts.wallet.add(account.privateKey);
 
         provider.injectValidation(function (payload) {
-            var expected = eth.accounts.wallet[0].signTransaction({
+            var expected = vns.accounts.wallet[0].signTransaction({
                 data: '0x1234567000000000000000000000000' + account.address.toLowerCase().replace('0x', '') + '00000000000000000000000000000000000000000000000000000000000000c8',
                 from: account.address.toLowerCase(),
-                gas: '0xc350',
+                gas: '0xd658',
                 gasPrice: '0xbb8',
                 chainId: '0x1',
                 nonce: '0x1',
+                chain: 'mainnet',
+                hardfork: 'petersburg'
             }).then(function (tx) {
                 const expected = tx.rawTransaction;
                 assert.equal(payload.method, 'vns_sendRawTransaction');
@@ -3078,17 +3081,19 @@ describe('typical usage', function() {
         provider.injectResult('0x321');
 
 
-        var contract = new eth.Contract(abi);
+        var contract = new vns.Contract(abi);
 
         contract.deploy({
             data: '0x1234567',
             arguments: [account.address, 200]
         }).send({
             from: account.address,
-            gas: 50000,
+            gas: 54872,
             gasPrice: 3000,
             chainId: 1,
             nonce: 1,
+            chain: 'mainnet',
+            hardfork: 'petersburg'
         })
             .on('transactionHash', function (value) {
                 assert.equal('0x5550000000000000000000000000000000000000000000000000000000000032', value);

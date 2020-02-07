@@ -1,6 +1,6 @@
 var chai = require('chai');
 var assert = chai.assert;
-var Eth = require('../packages/web3-vns');
+var Vns = require('../packages/web3-vns');
 var sha3 = require('../packages/web3-utils').sha3;
 var FakeIpcProvider = require('./helpers/FakeIpcProvider');
 var FakeHttpProvider = require('./helpers/FakeHttpProvider');
@@ -36,9 +36,9 @@ describe('contract', function () {
     describe('method.encodeABI', function () {
         it('should handle bytes32 arrays that only contain 1 byte', function () {
             var provider = new FakeIpcProvider();
-            var eth = new Eth(provider);
+            var vns = new Vns(provider);
 
-            var contract = new eth.Contract(abi);
+            var contract = new vns.Contract(abi);
 
             var result = contract.methods.takesTwoBytes32('0x'.concat('a'.repeat(2)), '0x'.concat('b'.repeat(2))).encodeABI();
 
@@ -51,9 +51,9 @@ describe('contract', function () {
 
         it('should handle bytes32 arrays that are short 1 byte', function () {
             var provider = new FakeIpcProvider();
-            var eth = new Eth(provider);
+            var vns = new Vns(provider);
 
-            var contract = new eth.Contract(abi);
+            var contract = new vns.Contract(abi);
 
             var result = contract.methods.takesTwoBytes32('0x'.concat('a'.repeat(62)), '0x'.concat('b'.repeat(62))).encodeABI();
 
@@ -66,9 +66,9 @@ describe('contract', function () {
 
         // it('should throw an exception on bytes32 arrays that have an invalid length', function () {
         //     var provider = new FakeIpcProvider();
-        //     var eth = new Eth(provider);
+        //     var vns = new Vns(provider);
         //
-        //     var contract = new eth.Contract(abi);
+        //     var contract = new vns.Contract(abi);
         //
         //     var test = function () {
         //         return contract.methods.takesTwoBytes32('0x'.concat('a'.repeat(63)), '0x'.concat('b'.repeat(63))).encodeABI();
@@ -79,9 +79,9 @@ describe('contract', function () {
 
         it('should handle bytes32 arrays that are full', function () {
             var provider = new FakeIpcProvider();
-            var eth = new Eth(provider);
+            var vns = new Vns(provider);
 
-            var contract = new eth.Contract(abi);
+            var contract = new vns.Contract(abi);
 
             var result = contract.methods.takesTwoBytes32('0x'.concat('a'.repeat(64)), '0x'.concat('b'.repeat(64))).encodeABI();
 
@@ -94,9 +94,9 @@ describe('contract', function () {
 
         // it('should throw an exception on bytes32 arrays that are too long', function () {
         //     var provider = new FakeIpcProvider();
-        //     var eth = new Eth(provider);
+        //     var vns = new Vns(provider);
         //
-        //     var contract = new eth.Contract(abi);
+        //     var contract = new vns.Contract(abi);
         //
         //     var test = function() {
         //         contract.methods.takesTwoBytes32('0x'.concat('a'.repeat(66)), '0x'.concat('b'.repeat(66))).encodeABI();

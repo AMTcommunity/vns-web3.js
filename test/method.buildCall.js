@@ -2,7 +2,7 @@ var chai = require('chai');
 var assert = chai.assert;
 var formatters = require('../packages/web3-core-helpers/src/formatters.js');
 var FakeHttpProvider = require('./helpers/FakeIpcProvider');
-var Eth = require('../packages/web3-vns');
+var Vns = require('../packages/web3-vns');
 var Method = require('../packages/web3-core-method');
 
 var address = '0x1234567890123456789012345678901234567891';
@@ -12,14 +12,14 @@ describe('lib/web3/method', function () {
     describe('buildCall', function () {
         it('should return a promise and resolve it', function (done) {
             var provider = new FakeHttpProvider();
-            var eth = new Eth(provider);
+            var vns = new Vns(provider);
             var method = new Method({
                 name: 'call',
                 call: 'vns_call',
                 params: 2,
                 inputFormatter: [formatters.inputCallFormatter, formatters.inputDefaultBlockNumberFormatter.bind({defaultBlock: 'latest'})]
             });
-            method.setRequestManager(eth._requestManager);
+            method.setRequestManager(vns._requestManager);
 
             // generate send function
             var send = method.buildCall();
@@ -49,14 +49,14 @@ describe('lib/web3/method', function () {
         });
         it('should return a promise and fail it', function (done) {
             var provider = new FakeHttpProvider();
-            var eth = new Eth(provider);
+            var vns = new Vns(provider);
             var method = new Method({
                 name: 'call',
                 call: 'vns_call',
                 params: 2,
                 inputFormatter: [formatters.inputCallFormatter, formatters.inputDefaultBlockNumberFormatter.bind({defaultBlock: 'latest'})]
             });
-            method.setRequestManager(eth._requestManager);
+            method.setRequestManager(vns._requestManager);
 
             // generate send function
             var send = method.buildCall();
@@ -94,7 +94,7 @@ describe('lib/web3/method', function () {
 
         it('should return an error, if the outputFormatter returns an error', function (done) {
             var provider = new FakeHttpProvider();
-            var eth = new Eth(provider);
+            var vns = new Vns(provider);
             var method = new Method({
                 name: 'call',
                 call: 'vns_call',
@@ -104,7 +104,7 @@ describe('lib/web3/method', function () {
                     return new Error('Error!');
                 }
             });
-            method.setRequestManager(eth._requestManager);
+            method.setRequestManager(vns._requestManager);
 
             // generate send function
             var send = method.buildCall();
@@ -136,7 +136,7 @@ describe('lib/web3/method', function () {
 
         it('should return an error, if the outputFormatter throws', function (done) {
             var provider = new FakeHttpProvider();
-            var eth = new Eth(provider);
+            var vns = new Vns(provider);
             var method = new Method({
                 name: 'call',
                 call: 'vns_call',
@@ -146,7 +146,7 @@ describe('lib/web3/method', function () {
                     throw new Error('Error!');
                 }
             });
-            method.setRequestManager(eth._requestManager);
+            method.setRequestManager(vns._requestManager);
 
             // generate send function
             var send = method.buildCall();
@@ -178,14 +178,14 @@ describe('lib/web3/method', function () {
 
         it('should fill in gasPrice if not given', function (done) {
             var provider = new FakeHttpProvider();
-            var eth = new Eth(provider);
+            var vns = new Vns(provider);
             var method = new Method({
                 name: 'sendTransaction',
                 call: 'vns_sendTransaction',
                 params: 1,
                 inputFormatter: [formatters.inputTransactionFormatter]
             });
-            method.setRequestManager(eth._requestManager, eth);
+            method.setRequestManager(vns._requestManager, vns);
 
             // generate send function
             var send = method.buildCall();
@@ -221,14 +221,14 @@ describe('lib/web3/method', function () {
 
         var succeedOnReceipt = function () {
             var provider = new FakeHttpProvider();
-            var eth = new Eth(provider);
+            var vns = new Vns(provider);
             var method = new Method({
                 name: 'sendTransaction',
                 call: 'vns_sendTransaction',
                 params: 1,
                 inputFormatter: [formatters.inputTransactionFormatter]
             });
-            method.setRequestManager(eth._requestManager, eth);
+            method.setRequestManager(vns._requestManager, vns);
 
             // generate send function
             var send = method.buildCall();
@@ -344,14 +344,14 @@ describe('lib/web3/method', function () {
 
         var succeedwhenDeploying = function () {
             var provider = new FakeHttpProvider();
-            var eth = new Eth(provider);
+            var vns = new Vns(provider);
             var method = new Method({
                 name: 'sendTransaction',
                 call: 'vns_sendTransaction',
                 params: 1,
                 inputFormatter: [formatters.inputTransactionFormatter]
             });
-            method.setRequestManager(eth._requestManager); // second parameter accounts
+            method.setRequestManager(vns._requestManager); // second parameter accounts
 
             // generate send function
             var send = method.buildCall();
@@ -462,14 +462,14 @@ describe('lib/web3/method', function () {
 
         var failOnCodeEmpty = function () {
             var provider = new FakeHttpProvider();
-            var eth = new Eth(provider);
+            var vns = new Vns(provider);
             var method = new Method({
                 name: 'sendTransaction',
                 call: 'vns_sendTransaction',
                 params: 1,
                 inputFormatter: [formatters.inputTransactionFormatter]
             });
-            method.setRequestManager(eth._requestManager, eth);
+            method.setRequestManager(vns._requestManager, vns);
 
             // generate send function
             var send = method.buildCall();
@@ -562,14 +562,14 @@ describe('lib/web3/method', function () {
 
         var failOnMissingAddress = function () {
             var provider = new FakeHttpProvider();
-            var eth = new Eth(provider);
+            var vns = new Vns(provider);
             var method = new Method({
                 name: 'sendTransaction',
                 call: 'vns_sendTransaction',
                 params: 1,
                 inputFormatter: [formatters.inputTransactionFormatter]
             });
-            method.setRequestManager(eth._requestManager, eth);
+            method.setRequestManager(vns._requestManager, vns);
 
             // generate send function
             var send = method.buildCall();
@@ -662,14 +662,14 @@ describe('lib/web3/method', function () {
 
         var failOnTimeout = function () {
             var provider = new FakeHttpProvider();
-            var eth = new Eth(provider);
+            var vns = new Vns(provider);
             var method = new Method({
                 name: 'sendTransaction',
                 call: 'vns_sendTransaction',
                 params: 1,
                 inputFormatter: [formatters.inputTransactionFormatter]
             });
-            method.setRequestManager(eth._requestManager, eth);
+            method.setRequestManager(vns._requestManager, vns);
 
             // generate send function
             var send = method.buildCall();
@@ -751,14 +751,14 @@ describe('lib/web3/method', function () {
 
         it('should give confirmation receipts with on("confirmation", ...) when subscribing "sendTransaction"', function (done) {
             var provider = new FakeHttpProvider();
-            var eth = new Eth(provider);
+            var vns = new Vns(provider);
             var method = new Method({
                 name: 'sendTransaction',
                 call: 'vns_sendTransaction',
                 params: 1,
                 inputFormatter: [formatters.inputTransactionFormatter]
             });
-            method.setRequestManager(eth._requestManager, eth);
+            method.setRequestManager(vns._requestManager, vns);
 
             // generate send function
             var send = method.buildCall();

@@ -22,7 +22,7 @@ describe('vns', function() {
         u.methodExists(vns, 'subscribe');
         u.methodExists(vns, 'Contract');
         u.methodExists(vns, 'Iban');
-
+        u.methodExists(vns, 'getChainId')
 
         u.methodExists(vns, 'isMining');
         u.methodExists(vns, 'getCoinbase');

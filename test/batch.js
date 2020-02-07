@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+
 var chai = require('chai');
 var assert = chai.assert;
 var Web3 = require('../packages/web3');
@@ -284,7 +286,7 @@ describe('lib/web3/batch', function () {
             var web3 = new Web3(provider);
 
             provider.sendAsync = provider.send
-            provider.send = () => { throw new Error('send was called instead of sendAsync') }
+            provider.send = () => { throw new Error('send was called instead of sendAsync');}
             var result = '0x126';
             var resultVal = '294';
             var result2 = '0x127';
