@@ -5,7 +5,7 @@
 # vns-web3.js - vnscoin JavaScript API
 
 This is the vnscoin [JavaScript API][docs]
-which connects to the [Generic JSON RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC) spec.
+which connects to the [Generic JSON RPC](https://github.com/AMTcommunity/go-vnscoin/wiki/JSON-RPC) spec.
 
 
 You need to run a local or remote vnscoin node to use this library.
