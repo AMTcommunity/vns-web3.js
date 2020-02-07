@@ -8,7 +8,7 @@
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 
 This is the Vnscoin [JavaScript API][docs]
-which connects to the [Generic JSON RPC](https://github.com/AMTcommunity/wiki/JSON-RPC) spec.
+which connects to the [Generic JSON RPC](https://github.com/AMTcommunity/go-vnscoin/wiki/JSON-RPC) spec.
 
 You need to run a local or remote [Vnscoin] node to use this library.
 
