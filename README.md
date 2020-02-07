@@ -8,7 +8,7 @@
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 
 This is the Vnscoin [JavaScript API][docs]
-which connects to the [Generic JSON RPC](https://github.com/ethereum/wiki/wiki/JSON-RPC) spec.
+which connects to the [Generic JSON RPC](https://github.com/AMTcommunity/wiki/JSON-RPC) spec.
 
 You need to run a local or remote [Vnscoin] node to use this library.
 
@@ -142,19 +142,6 @@ npm test
 -   All contributions have to go into 1.x, or the 2.x branch
 -   Please follow the code style of the other files, we use 4 spaces as tabs.
 
-### Community
-
--   [Gitter](https://gitter.im/ethereum/web3.js?source=orgpage)
--   [Forum](https://forum.ethereum.org/categories/ethereum-js)
-
-### Similar libraries in other languages
-
--   Python - [Web3.py](https://github.com/ethereum/web3.py)
--   Haskell - [hs-web3](https://github.com/airalab/hs-web3)
--   Java - [web3j](https://github.com/web3j/web3j)
--   Scala - [web3j-scala](https://github.com/mslinn/web3j-scala)
--   Purescript - [purescript-web3](https://github.com/f-o-a-m/purescript-web3)
--   PHP - [web3.php](https://github.com/sc0Vu/web3.php)
 
 [repo]: https://github.com/AMTcommunity/vns-web3.js
 [docs]: http://web3js.readthedocs.io/
