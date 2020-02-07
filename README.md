@@ -2,7 +2,7 @@
 <img src="https://github.com/ethereum/web3.js/raw/1.x/web3js.jpg" width=200 />
 </p>
 
-# web3.js - Vnscoin JavaScript API
+# vns-web3.js - Vnscoin JavaScript API
 
 [![Join the chat at https://gitter.im/ethereum/web3.js](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ethereum/web3.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)[![npm](https://img.shields.io/npm/dm/web3.svg)](https://www.npmjs.com/package/web3) [![Build Status][travis-image]][travis-url] [![dependency status][dep-image]][dep-url] [![dev dependency status][dep-dev-image]][dep-dev-url] [![Coverage Status][coveralls-image]][coveralls-url]
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
@@ -20,20 +20,6 @@ Please read the [documentation][docs] for more.
 
 ```bash
 npm install web3
-```
-
-### Yarn
-
-```bash
-yarn add web3
-```
-
-### Meteor
-
-_Note_: works only in the Browser for now. (PR welcome).
-
-```bash
-meteor add ethereum:web3
 ```
 
 ### In the Browser
@@ -57,7 +43,7 @@ var Web3 = require('web3');
 var web3 = new Web3('ws://localhost:8546');
 console.log(web3);
 > {
-    eth: ... ,
+    vns: ... ,
     shh: ... ,
     utils: ...,
     ...
@@ -75,7 +61,7 @@ web3.setProvider(new Web3.providers.WebsocketProvider('ws://localhost:8546'));
 There you go, now you can use it:
 
 ```js
-web3.eth.getAccounts().then(console.log);
+web3.vns.getAccounts().then(console.log);
 ```
 
 ### Usage with TypeScript
@@ -134,7 +120,7 @@ This will put all the browser build files into the `dist` folder.
 ### Testing (mocha)
 
 ```bash
-npm test
+npm run test
 ```
 
 ### Contributing
