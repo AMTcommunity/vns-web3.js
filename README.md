@@ -1,8 +1,5 @@
-<p align="center">
-<img src="https://github.com/ethereum/web3.js/raw/1.x/web3js.jpg" width=200 />
-</p>
 
-# vns-web3.js - Vnscoin JavaScript API
+# Vnscoin JavaScript API
 
 [![Join the chat at https://gitter.im/ethereum/web3.js](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ethereum/web3.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)[![npm](https://img.shields.io/npm/dm/web3.svg)](https://www.npmjs.com/package/web3) [![Build Status][travis-image]][travis-url] [![dependency status][dep-image]][dep-url] [![dev dependency status][dep-dev-image]][dep-dev-url] [![Coverage Status][coveralls-image]][coveralls-url]
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
@@ -19,7 +16,7 @@ Please read the [documentation][docs] for more.
 ### Node
 
 ```bash
-npm install web3
+npm install vns-web3@1.2.4
 ```
 
 ### In the Browser
@@ -38,7 +35,7 @@ This will expose `Web3` on the window object.
 
 ```js
 // in node.js
-var Web3 = require('web3');
+var Web3 = require('vns-web3');
 
 var web3 = new Web3('ws://localhost:8546');
 console.log(web3);
@@ -71,7 +68,7 @@ We support types within the repo itself. Please open an issue here if you find a
 You can use `web3.js` as follows:
 
 ```typescript
-import Web3 from 'web3';
+import Web3 from 'vns-web3';
 const web3 = new Web3('ws://localhost:8546');
 ```
 
